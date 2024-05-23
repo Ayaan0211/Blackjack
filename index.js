@@ -27,7 +27,7 @@ function getRandomCard() {
     let random = Math.floor(Math.random() * 13) + 1;
     if (random === 1) return 11;
     if (random > 10) return 10;
-    return random; 
+    return random;
 }
 
 function startGame() {
@@ -58,6 +58,7 @@ function renderGame() {
         winEl.textContent = "Wins: " + win;
         player.chips += (player.chips * 5);
         playerEl.textContent = player.name + ": $" + player.chips;
+        isAlive = false;
         hasBlackJack = true;
     }
     else {
@@ -81,19 +82,22 @@ function newCard() {
 }
 
 function cashOut() {
-    if (isAlive === true) {
+    if (isAlive && !hasBlackJack) {
         player.chips -= (player.chips/2);
         playerEl.textContent = player.name + ": $" + player.chips;
+        isAlive = false;
         resetGame();
     }
 }
 
 function resetGame() {
-    cards = [];
-    sum = 0;
-    hasBlackJack = false;
-    isAlive = false;
-    messageEl.textContent = "Press Start Game!";
-    cardsEl.textContent = "Cards: ";
-    sumEl.textContent = "Sum: "
+    if (!isAlive) {
+        cards = [];
+        sum = 0;
+        hasBlackJack = false;
+        isAlive = false;
+        messageEl.textContent = "Press Start Game!";
+        cardsEl.textContent = "Cards: ";
+        sumEl.textContent = "Sum: ";
+    }
 }
