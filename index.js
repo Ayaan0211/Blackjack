@@ -1,37 +1,65 @@
 let player = {
-    name: "Ayaan", 
-    chips: 150
+    name: 'No Name', 
+    chips: 0
 }
 
 let cards = [];
 let sum = 0;
 let win = 0;
 let loss = 0;
-let chips = 150;
+let out = 0;
 let hasBlackJack = false;
 let isAlive = false;
+let start = false;
 let message = "";
 let messageEl = document.getElementById("message");
+let infoEl = document.getElementById("info-btn")
 let sumEl = document.getElementById("sum");
 let cardsEl = document.getElementById("cards");
 let playerEl = document.getElementById("player");
 let winEl = document.getElementById("win");
 let lossEl = document.getElementById("loss");
+let cashEl = document.getElementById("out");
 
-playerEl.textContent = player.name + ": $" + player.chips;
-winEl.textContent = "Wins: " + win;
-lossEl.textContent = "Losses: " + loss;
+if (!start) {
+    messageEl.textContent = ("Press Enter Info!");
+}
 
+function info() {
+    let username = prompt("Enter Your Name: ");
+    let credits = prompt("Enter Amount of Money: ");
+    player.name = username;
+    player.chips = credits;
+    playerEl.textContent = player.name + ": $" + player.chips;
+    sum = 0;
+    win = 0;
+    loss = 0;
+    out = 0;
+    playerEl.textContent = player.name + ": $" + player.chips;
+    messageEl.textContent = "Press Start Game!";
+    winEl.textContent = "Wins: " + win;
+    lossEl.textContent = "Losses: " + loss;
+    cashEl.textContent = "Cash Outs: " + out;
+    start = true;
+    infoEl.textContent = "New Game";
+}
 
 function getRandomCard() {
     let random = Math.floor(Math.random() * 13) + 1;
-    if (random === 1) return 11;
+    console.log(random);
+    if (random === 1) return ace();
     if (random > 10) return 10;
     return random;
 }
 
+function ace() {
+    let value = prompt("Would you like to choose a 1 or 11? (Current Sum: " + sum + ")");
+    if (value === "1") return 1;
+    if (value === "11") return 11;
+}
+
 function startGame() {
-    if (cards.length === 0) {
+    if (cards.length === 0 && start) {
         isAlive = true;
         let card1 = getRandomCard();
         cards = [card1]
@@ -56,7 +84,9 @@ function renderGame() {
         message = "Wohoo! You've got Blackjack! (Press Reset Game To Play Again)";
         win++;
         winEl.textContent = "Wins: " + win;
+        /* player.chips += (Math.round(player.chips * 5 * 100)/100).toFixed(2); */
         player.chips += (player.chips * 5);
+        player.chips = Number(Math.round(player.chips + 'e2') + "e-2")
         playerEl.textContent = player.name + ": $" + player.chips;
         isAlive = false;
         hasBlackJack = true;
@@ -65,7 +95,8 @@ function renderGame() {
         message = "You're out of the game! (Press Reset Game)";
         loss++;
         lossEl.textContent = "Loss: " + loss;
-        player.chips -= (player.chips/2);
+        player.chips -= player.chips/2;
+        player.chips = Number(Math.round(player.chips + 'e2') + "e-2")
         playerEl.textContent = player.name + ": $" + player.chips;
         isAlive = false;
     }
@@ -83,9 +114,12 @@ function newCard() {
 
 function cashOut() {
     if (isAlive && !hasBlackJack) {
-        player.chips -= (player.chips/2);
+        player.chips -= player.chips/2;
+        player.chips = Number(Math.round(player.chips + 'e2') + "e-2")
         playerEl.textContent = player.name + ": $" + player.chips;
         isAlive = false;
+        out++;
+        cashEl.textContent = "Cash Outs: " + out;
         resetGame();
     }
 }

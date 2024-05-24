@@ -5,8 +5,12 @@
     </head>
 
     <body>
-        <h1>Blackjack</h1>
-        <h4>5x Your Money!</h4>
+        <div id="title">
+           <h1>BlackJack (Lite)</h1> 
+        </div>
+        <div id="info">
+            <button id="info-btn" onclick="info()">Enter Info</button>
+        </div>
         <p id="message">Press Start Game!</p>
         <p id="cards">Cards:</p>
         <p id="sum">Sum:</p>
@@ -15,8 +19,26 @@
         <button id="cashOut" onclick="cashOut()">CASH OUT</button>
         <button onclick="resetGame()">RESET GAME</button>
         <p id="player"></p>
-        <p id="win">Wins: </p>
-        <p id="loss">Losses: </p>
+        <div id="win-div">
+            <p id="win">Wins: </p>
+        </div>
+        <div id="loss-div">
+            <p id="loss">Losses: </p>
+        </div>
+        <div id="cashout-div">
+            <p id="out">Cash Outs: </p>
+        </div>
+        <div id="rules">
+            <h3>How The Game Works:</h3>
+            <p>-The player starts by pressing Start Game</p>
+            <p>-The goal is to get an exact value of 21</p>
+            <p>-The player continues drawing cards until '21' is hit, he cashes out, or the sum goes over 21</p>
+            <p>-If the player cashes out he receives 50% of his money back</p>
+            <p>-If the player goes over '21', he loses 50% of his money</p>
+            <p>-If the player hits '21' he will 5x his money</p>
+            <p>Cards 2-10 have the corresponding values, while face cards have a value of 10</p>
+            <p>If a 1 is drawn, players will have the option of choosing a 1 or 11</p>
+        </div>
         <script src="index.js"></script>
     </body>
 

@@ -1,6 +1,7 @@
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-image: url(background.jpg);
+    background-image: url(background1.jpg);
+    /* background-repeat: no-repeat; */
     background-size: cover;
     text-align: center;
     color: white;
@@ -13,6 +14,10 @@ h1 {
 
 #text {
     font-style: italic;
+}
+
+#info-btn {
+    background-color: rgb(113, 200, 251);
 }
 
 button {
@@ -33,4 +38,21 @@ button {
 
 #cashOut {
     background-color: red;
+}
+
+#win-div, #loss-div, #cashout-div {
+    width: 10%;
+    display: inline-block;
+}
+
+#rules {
+    border: 0.5em solid white;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    /* padding: 1em 1em; */
 }
